@@ -1,20 +1,20 @@
 class ship{
     constructor(_x,_y,_money,_name){
-        this.x=_x;
-        this.y=_y;
+        this.pos=new vector(_x,_y)
         this.money=_money;
         this.name=_name;
 
     }
 
     updateShip(){
-        this.display();
+        this.display(this.pos.x,this.pos.y);
     }
     //Renders the ship
-    display(){
-        square(this.x,this.y,50);
+    display(x,y){
+        rectMode(CENTER);
+        rect(x, y, 50, 50);
         textAlign(CENTER)
-        text(this.name,this.x,this.y-50)
+        text(this.name,x,y-50)
         
     }
 
@@ -25,6 +25,10 @@ class ship{
         let copper = a[0] || 0;
         let arr = [gold, silver, copper];
         return arr;
+    }
+    goTo(pos){
+        print(pos)
+        this.pos.set(pos);
     }
 }
 
