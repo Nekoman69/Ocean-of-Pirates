@@ -1,3 +1,14 @@
+let mysteryCards = [
+  "Du har vundet 100 kr!",
+  "Tabt i ørkenen. Gå to skridt tilbage.",
+  "Modtag en gratis middag!",
+  "Find skattekisten og få 500 kr!",
+  "Du er blevet forfulgt af pirater. Betal 50 kr i løsesum.",
+  // Tilføj flere "mystery cards" her...
+];
+let drawnCard = "";
+let isTextVisible = false;
+let isGridPaused = false;
 var myGrid;
 var myManager;
 var turnButton;
@@ -19,7 +30,31 @@ function moveShipSus(){
     print("You already moved");
   }
 }
+function drawMysteryCard() {
+  console.log("Draw Card")
+  // Træk et tilfældigt kort fra mysteryCards-listen
+  let randomIndex = floor(random(mysteryCards.length));
+  //drawnCard = mysteryCards[randomIndex];
+  drawnCard = random(mysteryCards);
+  textAlign(CENTER, CENTER)
+  background(220);
 
+  textSize(20);
+  fill(0);
+  text(drawnCard, width / 2, height / 2 - 20);
+    
+   // Vis teksten
+   isTextVisible = true;
+   grid.js=wait(5000)
+   isGridPaused = true;
+ 
+   // Vent i 5 sekunder og skjul teksten derefter
+   setTimeout(function () {
+     isTextVisible = false;
+  
+     isgridPaused = false;
+   }, 5000); // 5000 millisekunder (5 sekunder)
+ }
 
 function setup() {
   createCanvas(700, 700);
@@ -35,6 +70,7 @@ function setup() {
   let buttonSize=25
   newButton(turnButton,"New turn", newTurnSus, 50, myGrid.padding/2-buttonSize/2, buttonSize)  
   newButton(turnButton,"Move ship", moveShipSus, 150, myGrid.padding/2-buttonSize/2, buttonSize)
+  newButton(turnButton,"Draw card", drawMysteryCard, 250, myGrid.padding/2-buttonSize/2, buttonSize)
 
   //Spawnpositions / Tests.
   myShip.goTo(myGrid.getPixelPos(1,1))
